@@ -11,3 +11,8 @@
 										else={:put set1;/ip dhcp-server network set [find address="192.168.50.0/24"] gateway=192.168.50.1 dns-server=192.168.50.1
 										}
 					   }
+
+
+
+
+:if ([/ping 192.168.50.254 count=3]>1) do={:put set254;/ip dhcp-server network set [find address="192.168.50.0/24"] gateway=192.168.50.254 dns-server=192.168.50.254} else={:put judge;:if ([/ping 192.168.50.253 count=3]>0) do={:put set253;/ip dhcp-server network set [find address="192.168.50.0/24"] gateway=192.168.50.253 dns-server=192.168.50.253} else={:put set1;/ip dhcp-server network set [find address="192.168.50.0/24"] gateway=192.168.50.1 dns-server=192.168.50.1}}
